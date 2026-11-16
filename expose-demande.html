@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Exposé de ma situation et demande</title>
+<style>
+:root{color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:#000;font:1.1rem/1.6 Georgia,"Times New Roman",serif}
+header.bar{position:sticky;top:0;z-index:2;background:#f1f3f5;border-bottom:2px solid #000;padding:.6rem clamp(1rem,3vw,2.5rem);display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+.bar .t{font:700 .95rem system-ui,sans-serif;margin-right:auto}
+.b{font:600 .85rem system-ui,sans-serif;padding:.4rem .9rem;border:1px solid #000;background:#fff;color:#000;border-radius:4px;cursor:pointer}
+.b:hover{background:#dbe8ff}
+main{padding:1.2rem clamp(1rem,3vw,2.5rem) 4rem}
+.e{outline:none;padding:1px 4px;border-radius:3px;white-space:pre-wrap;min-width:0}
+.e:focus{background:#dbe8ff}
+.e:empty::before{content:"…";color:#555}
+h1.e{font-size:2rem;font-weight:700;margin:0 0 .3rem;line-height:1.2}
+.sub{font-style:italic;color:#333;margin:0 0 1.5rem}
+.sec{margin:0 0 1.8rem;counter-reset:n}
+.st{display:flex;justify-content:space-between;gap:.8rem;align-items:center;font-size:1.25rem;font-weight:700;border-bottom:2px solid #000;padding-bottom:.2rem;margin:0 0 .6rem}
+.st .e{flex:1}
+.it{display:flex;gap:.6rem;align-items:flex-start;padding:.25rem 0}
+.it .e{flex:1}
+.k-li::before{content:"•";font-weight:700;padding-top:1px}
+.k-n{counter-increment:n}
+.k-n::before{content:counter(n) ".";font-weight:700;min-width:1.5em}
+.ctl{display:flex;gap:.25rem;flex:none;opacity:.5}
+.it:hover .ctl,.st:hover .ctl{opacity:1}
+.ctl button,.mini{font:12px system-ui,sans-serif;border:1px solid #777;background:#fff;color:#000;border-radius:5px;cursor:pointer;padding:0 .5rem}
+.mini{padding:.2rem .6rem;margin:.4rem .4rem 0 0}
+.ctl button:hover,.mini:hover{background:#dbe8ff}
+@page{size:A4 portrait;margin:15mm}
+@media print{
+*{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+html,body{height:auto!important;overflow:visible!important;font-size:12pt;background:#fff}
+header.bar,.ctl,.adds,.addsec{display:none!important}
+main{padding:0}
+h1.e{font-size:20pt}
+.st{break-after:avoid;page-break-after:avoid}
+.it{break-inside:avoid;page-break-inside:avoid}
+.sec{margin-bottom:12pt}
+}
+</style>
+</head>
+<body>
+<header class="bar">
+<span class="t">Exposé et demande</span>
+<button class="b" id="bPdf">Exporter en PDF</button>
+<button class="b" id="bJson">Exporter en JSON</button>
+<label class="b">Importer un JSON<input id="fJson" type="file" accept=".json,application/json" hidden></label>
+<button class="b" id="bReset">Réinitialiser</button>
+</header>
+<main id="main"></main>
+<script>
+const I=(k,x)=>({k,x});
+const DEFAULT={
+title:"Exposé de ma situation et demande",
+sub:"Document préparé pour le rendez-vous avec le syndic. Les crochets sont à compléter.",
+sections:[
+{t:"Contexte",items:[I("p","Je suis informaticien, avec plus de six ans de service sans sanction ni reproche. Mon employeur est [privé / public / ASBL], mon contrat est [type]. Je travaille dans un autre secteur du bâtiment que les collègues concernés, sans lien hiérarchique ni tâche commune avec eux.")]},
+{t:"Les faits",items:[
+I("p","Depuis [date], pendant environ un an et demi, deux collègues, dont un a pris sa retraite depuis, ont exercé sur moi des pressions répétées :"),
+I("li","Tentative de me retirer les clés qui m’avaient été confiées."),
+I("li","Nettoyage d’une salle d’études présenté comme relevant de moi, alors qu’il ne figure pas, à ma connaissance, dans ma fiche de poste [à vérifier]."),
+I("li","Interdiction d’être sur site hors service."),
+I("li","Mise à l’écart de l’accueil, où se trouve la machine de pointage."),
+I("li","Tentatives de rallier d’autres collègues contre moi."),
+I("li","Qualificatifs sur ma personne (« toxique », « on ne peut pas lui faire confiance »)."),
+I("li","Plaintes répétées auprès de ma hiérarchie, dont j’ignore le contenu."),
+I("p","Lors d’un entretien à trois, mon responsable a déclaré que les représailles étaient inacceptables et devaient cesser. Rien n’a été écrit, et il m’a ensuite dit qu’on ne pouvait plus me faire confiance.")]},
+{t:"Ce que je reconnais",items:[
+I("li","J’ai traversé une période de deuil et de dépression, pendant laquelle j’ai consommé de l’alcool [préciser ce qui est vrai pour le lieu de travail]."),
+I("li","J’ai été présent sur mon lieu de travail hors service, ce que ma hiérarchie m’a demandé de ne plus faire."),
+I("li","J’ai eu des paroles inappropriées lors de l’entretien, dont je me suis excusé.")]},
+{t:"Mes questions",items:[
+I("n","Mes faits peuvent-ils justifier une demande d’intervention psychosociale formelle, et quels en sont les risques ?"),
+I("n","Le règlement de travail prévoit-il des sanctions et une politique sur l’alcool, et ont-elles été respectées à mon égard ?"),
+I("n","Comment faire vérifier ma fiche de poste et le caractère régulier des tâches qu’on a voulu m’imputer ?"),
+I("n","Comment obtenir mon dossier personnel et le contenu des plaintes me concernant ?"),
+I("n","De quelle protection contre les représailles puis-je bénéficier ?"),
+I("n","Les qualificatifs employés à mon sujet ouvrent-ils un recours ?")]},
+{t:"Ce que je demande",items:[I("p","Pas de sanction contre quiconque : un cadre de travail clair, une trace écrite des engagements de ma hiérarchie, la restauration de la confiance, et une protection si cela reprend.")]}
+]};
+const KEY="expose-v1",main=document.getElementById("main");
+let D;
+function clone(x){return JSON.parse(JSON.stringify(x))}
+try{D=JSON.parse(localStorage.getItem(KEY))}catch(e){}
+if(!D||!Array.isArray(D.sections))D=clone(DEFAULT);
+function save(){try{localStorage.setItem(KEY,JSON.stringify(D))}catch(e){}}
+function mk(tag,cls){const d=document.createElement(tag);if(cls)d.className=cls;return d}
+function ed(txt,set,tag,cls){
+  const d=mk(tag||"div","e"+(cls?" "+cls:""));d.textContent=txt;
+  d.contentEditable="plaintext-only";if(d.contentEditable!=="plaintext-only")d.contentEditable="true";
+  d.oninput=()=>{set(d.textContent);save()};return d;
+}
+function btn(t,title,fn){const b=mk("button");b.textContent=t;b.title=title;b.onclick=fn;return b}
+function ctl(){const c=mk("div","ctl");c.append(...arguments);return c}
+function render(focus){
+  main.innerHTML="";
+  main.append(ed(D.title,v=>D.title=v,"h1"));
+  main.append(ed(D.sub,v=>D.sub=v,"div","sub"));
+  D.sections.forEach((s,si)=>{
+    const sec=mk("section","sec");
+    const st=mk("div","st");
+    st.append(ed(s.t,v=>s.t=v),ctl(btn("×","Supprimer la section",()=>{if(confirm("Supprimer cette section ?")){D.sections.splice(si,1);save();render()}})));
+    sec.append(st);
+    s.items.forEach((it,ii)=>{
+      const row=mk("div","it k-"+it.k);row.dataset.f=si+"-"+ii;
+      row.append(ed(it.x,v=>it.x=v),ctl(
+        btn("+","Ajouter dessous",()=>{s.items.splice(ii+1,0,I(it.k,""));save();render([si,ii+1])}),
+        btn("×","Supprimer",()=>{s.items.splice(ii,1);save();render()})));
+      sec.append(row);
+    });
+    const ad=mk("div","adds");
+    [["p","+ Paragraphe"],["li","+ Puce"],["n","+ Numéroté"]].forEach(a=>{
+      const b=mk("button","mini");b.textContent=a[1];
+      b.onclick=()=>{s.items.push(I(a[0],""));save();render([si,s.items.length-1])};ad.append(b);
+    });
+    sec.append(ad);main.append(sec);
+  });
+  const add=mk("button","b addsec");add.textContent="+ Ajouter une section";
+  add.onclick=()=>{D.sections.push({t:"Nouvelle section",items:[I("p","")]});save();render([D.sections.length-1,0])};
+  main.append(add);
+  if(focus){const el=main.querySelector('[data-f="'+focus.join("-")+'"] .e');if(el)el.focus()}
+}
+function download(name,content){
+  const a=mk("a");a.href=URL.createObjectURL(new Blob([content],{type:"application/json"}));a.download=name;
+  document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+document.getElementById("bPdf").onclick=()=>window.print();
+document.getElementById("bJson").onclick=()=>download("expose-demande-"+new Date().toISOString().slice(0,10)+".json",JSON.stringify({version:1,title:D.title,sub:D.sub,sections:D.sections},null,2));
+document.getElementById("fJson").onchange=e=>{
+  const f=e.target.files[0];if(!f)return;
+  f.text().then(t=>{
+    try{
+      const j=JSON.parse(t);
+      if(!Array.isArray(j.sections)||!j.sections.every(s=>s&&typeof s.t==="string"&&Array.isArray(s.items)&&s.items.every(i=>i&&typeof i.x==="string"&&["p","li","n"].includes(i.k))))throw 0;
+      D={title:String(j.title||""),sub:String(j.sub||""),sections:j.sections};save();render();
+    }catch(err){alert("Fichier JSON non valide.")}
+  });
+  e.target.value="";
+};
+document.getElementById("bReset").onclick=()=>{if(confirm("Remettre le texte d’origine ? Vos modifications seront perdues.")){D=clone(DEFAULT);save();render()}};
+render();
+</script>
+</body>
+</html>
