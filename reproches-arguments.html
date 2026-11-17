@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reproches et mes arguments</title>
+<style>
+:root{color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:#000;font:1rem/1.5 Georgia,"Times New Roman",serif}
+header.bar{position:sticky;top:0;z-index:3;background:#f1f3f5;border-bottom:2px solid #000;padding:.6rem clamp(1rem,2.5vw,2rem);display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+.bar .t{font:700 .95rem system-ui,sans-serif;margin-right:auto}
+.b{font:600 .85rem system-ui,sans-serif;padding:.4rem .9rem;border:1px solid #000;background:#fff;color:#000;border-radius:4px;cursor:pointer}
+.b:hover{background:#dbe8ff}
+main{padding:1rem clamp(1rem,2.5vw,2rem) 4rem}
+h1{font-size:1.7rem;margin:0 0 .3rem}
+.note{color:#222;margin:0 0 1.2rem;font-size:.95rem}
+.sec{margin:0 0 2.2rem}
+.st{display:flex;justify-content:space-between;gap:.8rem;align-items:center;font-size:1.25rem;font-weight:700;border-bottom:2px solid #000;padding-bottom:.2rem;margin:0 0 .5rem}
+.e{outline:none;padding:1px 4px;border-radius:3px;white-space:pre-wrap;min-width:0}
+.e:focus{background:#dbe8ff}
+.e:empty::before{content:"…";color:#555}
+.st .e{flex:1}
+table{width:100%;border-collapse:collapse;table-layout:fixed}
+th{text-align:left;font:700 .8rem system-ui,sans-serif;background:#f1f3f5;padding:.5rem;border-bottom:2px solid #000}
+td{padding:.5rem;border-bottom:1px solid #aaa;vertical-align:top}
+tr{break-inside:avoid}
+.q{font-weight:bold}
+.d{color:#222;font-size:.92rem}
+select{font:600 .85rem system-ui,sans-serif;padding:.3rem .4rem;border-radius:5px;border:1px solid #000;width:100%;color:#000}
+.s0{background:#bbf7d0}.s1{background:#fde68a}.s2{background:#fecaca}.s3{background:#e5e7eb}
+.ctl{display:flex;gap:.25rem;opacity:.5}
+tr:hover .ctl{opacity:1}
+.ctl button,.mini{font:12px system-ui,sans-serif;border:1px solid #777;background:#fff;color:#000;border-radius:5px;cursor:pointer;padding:0 .5rem}
+.mini{padding:.25rem .7rem;margin-top:.5rem}
+.ctl button:hover,.mini:hover{background:#dbe8ff}
+@page{size:A4 landscape;margin:10mm}
+@media print{
+*{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+html,body{height:auto!important;overflow:visible!important;font-size:11pt}
+header.bar,.ctl,.adds,.cc{display:none!important}
+main{padding:0}
+h1{font-size:18pt}
+.st{break-after:avoid;page-break-after:avoid}
+thead{display:table-header-group}
+tr{break-inside:avoid;page-break-inside:avoid}
+select{-webkit-appearance:none;appearance:none;border:0;padding:0;background:transparent;font-weight:700}
+}
+</style>
+</head>
+<body>
+<header class="bar">
+<span class="t">Reproches et mes arguments</span>
+<button class="b" id="bPdf">Exporter en PDF</button>
+<button class="b" id="bJson">Exporter en JSON</button>
+<label class="b">Importer un JSON<input id="fJson" type="file" accept=".json,application/json" hidden></label>
+<button class="b" id="bReset">Réinitialiser</button>
+</header>
+<main id="main"></main>
+<script>
+const SOL=["Solide","À vérifier","Fragile","À remplir"];
+const R=(q,a,s,d)=>({q,a,s,d});
+const DEFAULT={title:"Les reproches et mes arguments",
+note:"« Solidité » est mon estimation, pas un avis juridique. L’attribution à Hussein ou à Olivier reste à confirmer à l’écoute de l’enregistrement. Remplace ou corrige tout ce qui ne correspond pas à ce que tu sais.",
+sections:[
+{t:"Arguments professionnels",rows:[
+R("Venir à l’accueil alors que mon poste est en salle d’études","L’accueil abrite la machine de pointage : j’y passe pour pointer. À ma connaissance, aucune règle écrite ne m’en interdit l’accès. Pablo m’a demandé de ne pas y venir si Hussein y était : on m’écarte d’un lieu nécessaire à mon travail.","Solide","Existe-t-il une règle écrite ? Pablo accepte-t-il de le confirmer ?"),
+R("Être présent sur le lieu de travail hors service","Je le reconnais. Fred le savait et le tolérait, y compris pour mes cours du samedi. D’autres collègues le font. Olivier a déjà traité le point en me demandant de ne plus revenir.","À vérifier","Aucune autorisation écrite. Qui confirme la tolérance de Fred ? D’autres collègues le font-ils sans être repris ?"),
+R("Dormir sur place","Une seule fois, arrivé très tôt, je me suis assoupi. Je n’ai jamais dormi sur place [si exact].","À vérifier","Ce fait est apparu tard : ta version doit rester identique partout."),
+R("Détenir des clés sans y avoir droit","Fred m’a confié le trousseau. J’ai géré seul un centre pendant des périodes de deux mois. Qui a décidé de me les retirer, et sur quelle base ?","Solide","Fred a « certainement » demandé l’avis de la hiérarchie : à vérifier. Trace écrite de la remise des clés ?"),
+R("Demander des justificatifs sur d’autres collègues","Je passais récupérer des affaires dans mon armoire. On m’a adressé la parole et la conversation s’est engagée. Je n’ai pas cherché la confrontation : un épisode isolé, de quelques minutes.","À vérifier","Ce que tu as réellement dit sur Walid, la date, qui était présent (Hussein ?). Évoquer les absences d’un autre peut passer pour de l’ingérence."),
+R("Gestes et manières devant plusieurs collègues à l’accueil","Je conteste. Quels gestes, précisément ? Il décrit des intentions, pas des faits. En dehors de cet épisode, mes croisements avec lui ont toujours duré quelques secondes.","À vérifier","Même épisode que ci-dessus : « jamais plus de dix secondes » ne tient pas pour ce jour-là."),
+R("Être venu ivre à l’accueil devant des collègues et des étudiants","Je ne conteste pas une période d’alcool. Je demande les dates précises et ce que Walid a réellement vu.","Fragile","Dépend de ce qui est vrai ce jour-là : ne conteste que ce qui est faux."),
+R("Avoir été alcoolisé à plusieurs reprises sur le lieu de travail","À ma connaissance, quelques épisodes occasionnels pendant ma période de deuil, sans incident grave. C’est terminé depuis [date].","Fragile","« Occasionnels » et « sans incident » sont des absolus à risque. Olivier dit en avoir été témoin."),
+R("Plaintes d’étudiants à l’accueil","Aucune plainte écrite ne m’a été présentée. Je demande le contenu, les dates et les noms.","À vérifier","Je ne sais pas s’il en existe."),
+R("Salle d’études sale, dans un état déplorable","On a demandé aux collègues de ne plus y aller, puis on a montré son état à Olivier. Le nettoyage ne figure pas dans ma fiche de poste [à vérifier]. Qui la nettoyait avant ?","À vérifier","La fiche de poste décide de tout. Quels collègues à qui on l’a demandé peuvent le confirmer ?"),
+R("Nettoyage de la salle d’études qui me revient, pas à son équipe","Il est le seul à avoir revendiqué ce refus pendant des années, y compris en réunion. La répartition relève de la hiérarchie et de la fiche de poste, pas d’un collègue.","À vérifier","Même point : la fiche de poste."),
+R("Remettre un papier sur les entretiens d’embauche à l’accueil sans parler à personne","Je ne connais ni la date ni le contexte. Je demande à voir le papier.","À remplir","Ta version manque : que s’est-il passé ?"),
+R("Message WhatsApp avec son nom adressé à Paul","Je n’en connais ni le contenu ni la date. Paul peut confirmer ou non.","À remplir","Ta version manque."),
+R("Comportement inapproprié devant des personnes haut placées","Je demande qui, quand, et quel comportement précis : l’épisode n’a pas été daté.","Fragile","Probablement le même épisode que ceux de l’accueil : à clarifier."),
+R("Être inutile, ne servir à rien","C’est une opinion, pas un fait. Plus de six ans sans reproche, des compétences reconnues par [noms]. Cette phrase vise mon emploi : c’est un préjudice professionnel pour moi.","Solide","Qui peut témoigner de ta réputation ? Mets les noms."),
+R("Ne pas être digne de confiance","C’est une étiquette, pas un fait daté. Je demande sur quels faits elle repose et comment la rétablir. Répétée pendant un an et demi, elle a fini par s’imposer.","Solide","Olivier dit avoir vu certaines choses lui-même."),
+R("Insultes pendant l’entretien devant Olivier","Je le reconnais et je me suis excusé. C’est un moment de tension après un an et demi de pression, qui ne justifie pas ce qui précède.","Fragile","Le reproche est exact : ne pas y revenir, ne pas s’en servir comme excuse.")]},
+{t:"Arguments personnels",rows:[
+R("Ne plus lui adresser la parole","C’est lui qui m’a demandé de ne plus lui parler. Nous ne travaillons pas ensemble.","À vérifier","À confirmer à l’écoute de l’enregistrement."),
+R("Ne pas être venu lui parler directement","Il m’avait demandé de ne plus lui parler, puis m’en fait le reproche : c’est contradictoire.","À vérifier","Même point : à confirmer à l’écoute."),
+R("Apporter mes problèmes personnels sur le lieu de travail","J’avais une période de deuil et j’étais hors service. Je ne faisais rien de mal. Ce n’était pas à lui de le juger.","Fragile","Reconnaître que cette période a pesé sur certains."),
+R("Alcoolique fini, qui boit dès le matin","C’est une étiquette sans fait daté. Je reconnais une période, pas « dès le matin ». Qui l’a dit, à qui, quand ?","À vérifier","L’épisode où tu t’es assoupi le matin pourrait être cité."),
+R("Ivre mort","C’est une exagération non datée : je demande les faits précis.","À vérifier","Dépend de l’épisode de l’accueil."),
+R("Être excité et ne plus savoir ce que je dis quand j’ai bu","Je n’ai connaissance d’aucun incident précis de ce type.","Fragile","Description très personnelle : si des collègues la confirment, elle pèse lourd."),
+R("Être sale","C’est une allégation sans fait précis. Elle semble venir de l’état de la salle d’études, que je ne devais pas nettoyer [à vérifier].","À vérifier","Sale = hygiène personnelle ou salle ? Ce n’est pas clair."),
+R("Être un élément toxique dans l’équipe","Je ne fais pas partie de leur équipe : je travaille de l’autre côté du bâtiment. Moustapha l’a proclamé haut et fort : c’est son vocabulaire.","Solide","Qui a entendu Moustapha ? Que disent les autres collègues ?"),
+R("Faire souffrir les collègues","Je demande qui, quand et en quoi : nous ne travaillons pas ensemble. Je reconnais que ma période a pu peser.","Fragile","Olivier a dit que des collègues avaient souffert : ne pas nier."),
+R("Ne pas reconnaître mon problème d’alcool, minimiser","J’ai reconnu une période de dépression et d’alcool devant Olivier et Hussein. Ma version est unique et la même partout [à préparer].","À vérifier","Contradictions possibles de l’entretien (jamais ivre / une fois)."),
+R("Ne pas me rendre compte de mon comportement","J’ai reconnu mes torts et présenté mes excuses. Ce que je conteste, c’est la durée et la proportion.","À vérifier","Difficile à contester sans preuve de ce qui a changé : montre-le."),
+R("Juger les gens et leurs compétences","Un seul fait : ce que j’ai dit sur d’autres collègues à l’accueil, que je reconnais comme déplacé. Ce n’est pas un comportement habituel.","À vérifier","Lié à l’épisode de l’accueil."),
+R("Me plaindre auprès d’Olivier, être un rapporteur","M’adresser à ma hiérarchie est la voie normale, pour tout le monde. Moi, je veux savoir de quoi Hussein s’est plaint, à plusieurs reprises.","Solide","S’adresser à sa hiérarchie est légitime pour les deux."),
+R("Être agressif, insulter","Insultes reconnues, excuses présentées. En dehors de cet épisode, aucun fait précis d’agressivité ne m’a été reproché [à vérifier].","Fragile","Éviter de répondre sur le ton.")]}
+]};
+const KEY="reproches-v1",main=document.getElementById("main");
+let D;
+function clone(x){return JSON.parse(JSON.stringify(x))}
+try{D=JSON.parse(localStorage.getItem(KEY))}catch(e){}
+if(!D||!Array.isArray(D.sections))D=clone(DEFAULT);
+function save(){try{localStorage.setItem(KEY,JSON.stringify(D))}catch(e){}}
+function mk(tag,cls){const d=document.createElement(tag);if(cls)d.className=cls;return d}
+function ed(txt,set,tag,cls){
+  const d=mk(tag||"div","e"+(cls?" "+cls:""));d.textContent=txt;
+  d.contentEditable="plaintext-only";if(d.contentEditable!=="plaintext-only")d.contentEditable="true";
+  d.oninput=()=>{set(d.textContent);save()};return d;
+}
+function btn(t,title,fn){const b=mk("button");b.textContent=t;b.title=title;b.onclick=fn;return b}
+function paint(s){s.className="s"+Math.max(0,SOL.indexOf(s.value))}
+function render(focus){
+  main.innerHTML="";
+  main.append(ed(D.title,v=>D.title=v,"h1"));
+  main.append(ed(D.note,v=>D.note=v,"p","note"));
+  D.sections.forEach((s,si)=>{
+    const sec=mk("section","sec"),st=mk("div","st");
+    st.append(ed(s.t,v=>s.t=v));sec.append(st);
+    const t=mk("table"),cg=mk("colgroup");
+    [24,36,10,24,6].forEach(w=>{const c=mk("col");c.style.width=w+"%";cg.append(c)});t.append(cg);
+    const hd=mk("thead"),hr=mk("tr");
+    ["Reproche","Mes arguments","Solidité","Doute ou à vérifier",""].forEach(h=>{const th=mk("th");th.textContent=h;hr.append(th)});
+    hd.append(hr);t.append(hd);
+    const bd=mk("tbody");
+    s.rows.forEach((r,ri)=>{
+      const tr=mk("tr");tr.dataset.f=si+"-"+ri;
+      const c1=mk("td");c1.append(ed(r.q,v=>r.q=v,"div","q"));
+      const c2=mk("td");c2.append(ed(r.a,v=>r.a=v));
+      const c3=mk("td");const sel=mk("select");SOL.forEach(o=>sel.append(new Option(o,o)));sel.value=r.s;paint(sel);
+      sel.onchange=()=>{r.s=sel.value;save();paint(sel)};c3.append(sel);
+      const c4=mk("td");c4.append(ed(r.d,v=>r.d=v,"div","d"));
+      const c5=mk("td","cc"),ct=mk("div","ctl");
+      ct.append(btn("+","Ajouter dessous",()=>{s.rows.splice(ri+1,0,{q:"",a:"",s:"À remplir",d:""});save();render([si,ri+1])}),
+                btn("×","Supprimer",()=>{if(confirm("Supprimer cette ligne ?")){s.rows.splice(ri,1);save();render()}}));
+      c5.append(ct);
+      tr.append(c1,c2,c3,c4,c5);bd.append(tr);
+    });
+    t.append(bd);sec.append(t);
+    const ad=mk("div","adds"),b=mk("button","mini");b.textContent="+ Ajouter un reproche";
+    b.onclick=()=>{s.rows.push({q:"",a:"",s:"À remplir",d:""});save();render([si,s.rows.length-1])};
+    ad.append(b);sec.append(ad);main.append(sec);
+  });
+  if(focus){const el=main.querySelector('[data-f="'+focus.join("-")+'"] .e');if(el)el.focus()}
+}
+function download(name,content){
+  const a=mk("a");a.href=URL.createObjectURL(new Blob([content],{type:"application/json"}));a.download=name;
+  document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+document.getElementById("bPdf").onclick=()=>window.print();
+document.getElementById("bJson").onclick=()=>download("reproches-arguments-"+new Date().toISOString().slice(0,10)+".json",JSON.stringify({version:1,title:D.title,note:D.note,sections:D.sections},null,2));
+document.getElementById("fJson").onchange=e=>{
+  const f=e.target.files[0];if(!f)return;
+  f.text().then(t=>{
+    try{
+      const j=JSON.parse(t);
+      if(!Array.isArray(j.sections)||!j.sections.every(s=>s&&typeof s.t==="string"&&Array.isArray(s.rows)&&s.rows.every(r=>r&&typeof r.q==="string"&&typeof r.a==="string")))throw 0;
+      j.sections.forEach(s=>s.rows.forEach(r=>{r.d=String(r.d||"");r.s=SOL.includes(r.s)?r.s:"À remplir"}));
+      D={title:String(j.title||""),note:String(j.note||""),sections:j.sections};save();render();
+    }catch(err){alert("Fichier JSON non valide.")}
+  });
+  e.target.value="";
+};
+document.getElementById("bReset").onclick=()=>{if(confirm("Remettre le contenu d’origine ? Vos modifications seront perdues.")){D=clone(DEFAULT);save();render()}};
+render();
+</script>
+</body>
+</html>
